@@ -1,0 +1,6 @@
+-            self._storage.notify('sendtx', JSON.stringify({id: id}).catch(reject)
+
+./bin/initdb -U chromaway -W var/databases/postgres/
+./bin/createdb -h 127.0.0.1 -p 17520 chromaway
+node ./bin/chromanode-master.js -c config/master.yml
+node ./bin/chromanode-slave.js -c config/slave.yml
