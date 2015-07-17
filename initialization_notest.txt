@@ -1,4 +1,18 @@
--            self._storage.notify('sendtx', JSON.stringify({id: id}).catch(reject)
+apt-get install build-essential libtool autotools-dev autoconf libssl-dev libboost-all-dev pkg-config
+
+bitcoind -regtest -server
+
+ -datadir
+
+-conf=<file>
+
+-datadir=<dir>
+  -rpcuser=<user>
+       Username for JSON-RPC connections
+
+  -rpcpassword=<pw>
+       Password for JSON-RPC connections
+
 
 ./bin/initdb -U chromaway -W var/databases/postgres/
 ./bin/createdb -h 127.0.0.1 -p 17520 chromaway
