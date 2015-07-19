@@ -1,4 +1,4 @@
-apt-get install build-essential libtool autotools-dev autoconf libssl-dev libboost-all-dev pkg-config
+apt-get install build-essential libtool autotools-dev autoconf libssl-dev libboost-all-dev pkg-config libdb4.8++-dev
 
 bitcoind -regtest -server
 
