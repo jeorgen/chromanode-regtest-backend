@@ -79,6 +79,8 @@ then check on the system with:
 
 CONSTRUCTING A BLOCKCHAIN
 
+Make sure the ~/.bitcoin/bitcoin.conf has the the same username and password as you started the server with.
+
     ./bin/bitcoin-cli -regtest generate 101
 
 Or if you need more coins and blocks:
