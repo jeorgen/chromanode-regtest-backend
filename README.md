@@ -76,6 +76,7 @@ then check on the system with:
 
     ./bin/supervisorctl
 
+The chromanode slave (the json-rpc server) will serve on port 3001, with the default settings.
 
 CONSTRUCTING A BLOCKCHAIN
 
