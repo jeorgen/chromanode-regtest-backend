@@ -77,3 +77,16 @@ then check on the system with:
     ./bin/supervisorctl
 
 
+CONSTRUCTING A BLOCKCHAIN
+
+    ./bin/bitcoin-cli -regtest generate 101
+
+Or if you need more coins and blocks:
+
+    ./bin/bitcoin-cli -regtest generate 3000
+
+```generate``` does not seem to be cumulative, i.e. It will start over the second time.
+
+SPENDING BITCOINS
+
+Generate an address with ```./bin/bitcoin-cli -regtest getnewaddress```, and make a payment to it via bitcoin-cli. Then use the dumpprivkey command in bitcoin-cli for that address to get the private key.
