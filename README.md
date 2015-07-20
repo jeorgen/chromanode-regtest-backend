@@ -1,10 +1,10 @@
 WHAT IT DOES
 This buildout builds from source and configures in a local directory
 
-x postgresql
-x bitcoind in regtest mode
-x node.js and npm
-x supervisord to run the above and chromanode
+* postgresql
+* bitcoind in regtest mode
+* node.js and npm
+* supervisord to run the above and chromanode
 
 ...for experimental use with chromanode, specifically to test regtest mode in bitcoind.
 
@@ -21,7 +21,7 @@ Run:
 On Debian 7, the libdb4.8++-dev and friends (libdb4.8, libdb4.8-dev) must be downloaded from a newer Debian and be manually
 installed with dpkg -i
 
-Clone this repository, install with virtualenv a python2.7.
+Clone the chromanode-regtest-backend repository, install with virtualenv a python2.7.
 
 Then issue:
 
@@ -48,10 +48,12 @@ bitcoind's setting are in etc/base.cfg, under the "supervisor# section.
 
 SETTINGS FOR POSTGRESQL WITH CHROMANODE
 Initialize the postgresql database iwth password ```masonit```:
-./bin/initdb -U chromaway -W var/databases/postgres/
 
-Create a database by the name of ```chromaway```
-./bin/createdb -h 127.0.0.1 -p 17520 chromaway
+    ./bin/initdb -U chromaway -W var/databases/postgres/
+
+Create a database by the name of ```chromaway```:
+
+    ./bin/createdb -h 127.0.0.1 -p 17520 chromaway
 
 Make sure the postgresql urls in:
 
