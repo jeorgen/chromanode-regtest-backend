@@ -66,4 +66,14 @@ Make sure the postgresql urls in:
 
 agree with this.
 
+RUNNING THE SYSTEM
+
+Issue:
+
+    ./bin/supervisord
+
+then check on the system with:
+
+    ./bin/supervisorctl
+
 
