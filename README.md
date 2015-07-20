@@ -88,9 +88,21 @@ Or if you need more coins and blocks:
 
 SPENDING BITCOINS
 
-Generate an address with ```./bin/bitcoin-cli -regtest getnewaddress```, and make a payment to it via bitcoin-cli. Then use the dumpprivkey command in bitcoin-cli for that address to get the private key.
+Generate an address with:
+
+    ./bin/bitcoin-cli -regtest getnewaddress
+
+and make a payment to it via bitcoin-cli:
+
+    ./bin/bitcoin-cli -regtest sendtoaddress <address> 12
 
 Then bury your transaction under some blocks:
 
     ./bin/bitcoin-cli -regtest generate 6
+
+Then use the dumpprivkey command in bitcoin-cli for that address to get the private key.
+
+    ./bin/bitcoin-cli -regtest dumpprivkey <address>
+
+
 
