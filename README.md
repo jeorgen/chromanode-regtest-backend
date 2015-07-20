@@ -23,7 +23,9 @@ Run:
 On Debian 7, the libdb4.8++-dev and friends (libdb4.8, libdb4.8-dev) must be downloaded from a newer Debian and be manually
 installed with dpkg -i
 
-Clone the chromanode-regtest-backend repository, install with virtualenv a python2.7.
+Clone the chromanode-regtest-backend repository, install with virtualenv a python2.7 (may work wth other versions of python, python just builds the environment).
+
+    virtualenv .
 
 Then issue:
 
