@@ -38,14 +38,14 @@ INSTALL CHROMANODE
 The chromanode server is currently cloned from 
 https://github.com/jeorgen/chromanode-regtest-test
 
-and must appear as "chromanode" inside the directory where this README file is. Currently it is not installed as a submodule so ths must be done manually.
+and must appear as "chromanode" inside the directory where this README file is. Currently it is not installed as a submodule so this must be done manually.
 
 The chromanode repository https://github.com/jeorgen/chromanode-regtest-test is identical to the original right now, except user names and passwords.
 
 SETTINGS FOR BITCOIND WITH CHROMANODE
 
 bitcoind must be configured with the same user name and password as is used in chromanode.
-bitcoind's setting are in etc/base.cfg, under the "supervisor# section:
+bitcoind's setting are in etc/base.cfg, under the ```supervisor``` section:
 
     -regtest -server -rpcuser=chromaway -rpcpassword=masonit -port=8333
 
