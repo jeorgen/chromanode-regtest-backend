@@ -80,7 +80,7 @@ Here is a sample output from ./bin/supervisorctl:
     chromanode-slave                 RUNNING   pid 29702, uptime 0:00:21
     postgresql-server                RUNNING   pid 29700, uptime 0:00:21
 
-The chromanode slave (the json-rpc server) will serve http on port 3001, with the default settings in its YAML config file. The bitcoind-controller will serve json-rpc over http on port 17580. 
+The chromanode slave will serve http on port 3001, with the default settings in its YAML config file. The bitcoind-controller will serve json-rpc over http on port 17580. 
 
 CHANGING PORTS AND STUFF
 
