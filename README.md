@@ -1,16 +1,14 @@
 WHAT IT DOES
 
-This buildout is for testing use with chromanode, specifically to run it in regtest mode with bitcoind and in doing so having unlimited access to (regtest) bitcoins. The purpose is to facilitate testing bitcoin dependent services, including transactions and confirmations, without having to rely on bitcoin or testnet faucets.
+This buildout is for testing use with chromanode, specifically to run it in regtest mode with bitcoind and in doing so having unlimited access to (regtest) bitcoins. The purpose is to facilitate testing bitcoin dependent services, including transactions and confirmations, without having to rely on bitcoin or testnet faucets. The buildout contains a json-rpc server through which you can tell bitcoind to add confirmations on top of submitted transactions.
 
 This buildout builds from source and installs everything in its own local directory:
 
 * postgresql
 * bitcoind in regtest mode
 * node.js and npm
-* A small extra json-rpc server for mining new blocks
+* A small json-rpc server for mining new blocks
 * supervisord to run the above and to run chromanode
-
-The small extra json-rpc server has a method for adding blocks. This is so you can add confirmations on top of transactions that you submit to chromanode.
 
 DEPENDENCIES
 
@@ -22,11 +20,16 @@ Run:
 
 ```apt-get install build-essential libtool autotools-dev autoconf libssl-dev libboost-all-dev pkg-config libdb4.8++-dev```
 
+Make sure you have virtualenv installed for python2.7. In Ubuntu 14.04 that would be:
+
+```apt-get install python-virtualenv```
 
 On Debian 7, the libdb4.8++-dev and friends (libdb4.8, libdb4.8-dev) must be downloaded from a newer Debian and be manually
 installed with dpkg -i
 
-Clone the chromanode-regtest-backend repository (this repository), install with virtualenv using python2.7 (may work wth other versions of python, untested). Go into the cloned repository. Type:
+INSTALLATION
+
+Clone the chromanode-regtest-backend repository (this repository).  Go into the cloned repository. Type:
 
     virtualenv .
 
@@ -131,6 +134,10 @@ How do you mine blocks when you are not at the command line? The bitcoind-contro
 Will give a result similar to:
 
     {u'result': [u'00000001c2cf5c571d09117b832ec1b6a36c72c768504ffc28fce0b443ef6a3a']}
+
+With the use of a fronting Apache, Nginx or similar as a proxy, you can fold the bitcoind-controller server into some unused part of the url namespace of the chromanode web server. For example under:
+
+    /regtest
 
 
 
