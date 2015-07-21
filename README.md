@@ -57,9 +57,9 @@ Initialize the postgresql database with the password ```masonit```:
 
     ./bin/initdb -U chromaway -W var/databases/postgres/
 
-Create a database by the name of ```chromaway```:
+After starting the server with suprvisord, create a database by the name of ```chromaway```:
 
-    ./bin/createdb -h 127.0.0.1 -p 17520 chromaway
+    ./bin/createdb -O chromaway -U chromaway -W -h 127.0.0.1 -p 17520 chromaway
 
 Make sure the postgresql urls in:
 
