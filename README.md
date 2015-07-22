@@ -47,6 +47,9 @@ https://github.com/jeorgen/chromanode-regtest-test
 
 and must appear as "chromanode" inside the directory where this README file is. Currently it does not get installed as a git submodule so this must be done manually.
 
+enter the directory and type:
+
+    git checkout develop
 The chromanode repository https://github.com/jeorgen/chromanode-regtest-test is identical to the original right now, except user names and passwords.
 
 SETTINGS FOR POSTGRESQL WITH CHROMANODE
@@ -57,7 +60,7 @@ Initialize the postgresql database cluster with the password ```masonit```:
 
 Start the server:
 
-    bin/postgres -N 500 -i -p 17520 -D
+    ./bin/postgres -N 500 -i -p 17520 -D var/databases/postgres
 
 In another terminal window, create a database by the name of ```chromaway```:
 
