@@ -1,0 +1,24 @@
+chromanode:
+  network: testnet # livenet | testnet
+  testnetwork: regtest # testnet | regtest
+  sync:
+    maxCachedBlocks: 2 # useful for remote bitcoind
+
+logger:
+  level: verbose # verbose, info, warning, error
+  filename: master.log
+
+postgresql:
+  url: postgres://chromaway:masonit@localhost:17520/chromaway
+
+
+bitcoind:
+  peer:
+    host: localhost
+    port: 8333
+  rpc:
+    host: localhost
+    port: 8332
+    user: chromaway
+    pass: masonit
+    protocol: http

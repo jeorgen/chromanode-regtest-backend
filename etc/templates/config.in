@@ -1,0 +1,5 @@
+#config.in
+rpc_user = '${rpc_user}'
+rpc_password = '${rpc_password}'
+controller_port = ${controller_port}
+

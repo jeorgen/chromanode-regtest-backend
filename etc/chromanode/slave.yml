@@ -1,0 +1,13 @@
+chromanode:
+  network: testnet
+  enableHTTPS: false
+  host: localhost
+  port: 3001
+
+logger:
+  level: verbose # verbose, info, warning, error
+  filename: slave.log
+
+postgresql:
+  url: postgres://chromaway:masonit@localhost:17520/chromaway
+  poolSize: 10
