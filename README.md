@@ -14,18 +14,19 @@ DEPENDENCIES
 
 The following packages are needed for bitcoind to compile on Ubuntu 14.04LTS:
 
-```build-essential libtool autotools-dev autoconf libssl-dev libboost-all-dev pkg-config libdb4.8++-dev```
+```build-essential libtool autotools-dev autoconf libssl-dev libboost-all-dev pkg-config postgresql-server-dev-all python-virtualenv` libdb4.8++-dev```
+
+The libdb4.8++-dev is not part of the standard Ubuntu repositories. You can add the following repository under ```/etc/apt/sources.list.d/``` to get it:
+
+    deb http://ppa.launchpad.net/bitcoin/bitcoin/ubuntu trusty main
+    # deb-src http://ppa.launchpad.net/bitcoin/bitcoin/ubuntu trusty main
 
 Run:
 
-```apt-get install build-essential libtool autotools-dev autoconf libssl-dev libboost-all-dev pkg-config libdb4.8++-dev```
-
-Make sure you have virtualenv installed for python2.7. In Ubuntu 14.04 that would be:
-
-```apt-get install python-virtualenv```
+```apt-get install build-essential libtool autotools-dev autoconf libssl-dev libboost-all-dev pkg-config postgresql-server-dev-all python-virtualenv` libdb4.8++-dev```
 
 On Debian 7, the libdb4.8++-dev and friends (libdb4.8, libdb4.8-dev) must be downloaded from a newer Debian and be manually
-installed with dpkg -i
+installed with dpkg -i, or there may be a third party repository as well.
 
 INSTALLATION
 
@@ -42,7 +43,7 @@ The last one will take a bit of time (typically 5-20 minutes), since it will dow
 
 INSTALL CHROMANODE
 
-The chromanode server is currently cloned from 
+The chromanode server is currently cloned from
 https://github.com/jeorgen/chromanode-regtest-test
 
 and must appear as "chromanode" inside the directory where this README file is. Currently it does not get installed as a git submodule so this must be done manually.
@@ -50,7 +51,12 @@ and must appear as "chromanode" inside the directory where this README file is. 
 enter the directory and type:
 
     git checkout develop
-The chromanode repository https://github.com/jeorgen/chromanode-regtest-test is identical to the original right now, except user names and passwords.
+The chromanode repository https://github.com/jeorgen/chromanode-regtest-test has some pacthes for working with bitcoind in regtest mode.
+
+Install the dependencies for chromanode with:
+
+    ./bin/npm install chromanode/
+
 
 SETTINGS FOR POSTGRESQL WITH CHROMANODE
 
@@ -86,15 +92,15 @@ Here is a sample output from ./bin/supervisorctl:
     chromanode-slave                 RUNNING   pid 29702, uptime 0:00:21
     postgresql-server                RUNNING   pid 29700, uptime 0:00:21
 
-The chromanode slave will serve http on port 3001, with the default settings in its YAML config file. The bitcoind-controller will serve json-rpc over http on port 17580. 
+The chromanode slave will serve http on port 3001, with the default settings in its YAML config file. The bitcoind-controller will serve json-rpc over http on port 17580.
 
 CHANGING PORTS AND STUFF
 
 All port and authentication settings can be changed in etc/base.cfg in the config section. For any port and auth changes to take effect:
 
 * Stop supervisord (./bin/supervisorctl shutdown)
-* Rerun buildout (./bin/buildout) 
-* restart supervisor (./bin/supervisord) 
+* Rerun buildout (./bin/buildout)
+* restart supervisor (./bin/supervisord)
 
 CONSTRUCTING A BLOCKCHAIN
 
@@ -141,7 +147,3 @@ Will give a result similar to:
 With the use of a fronting Apache, Nginx or similar as a proxy, you can fold the bitcoind-controller server into some unused part of the url namespace of the chromanode web server. For example under:
 
     /regtest
-
-
-
-
