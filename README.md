@@ -50,7 +50,7 @@ and must appear as "chromanode" inside the directory where this README file is. 
 
 enter the directory and type:
 
-    git checkout develop
+    git checkout regtest
 The chromanode repository https://github.com/jeorgen/chromanode-regtest-test has some pacthes for working with bitcoind in regtest mode.
 
 Install the dependencies for chromanode with:
