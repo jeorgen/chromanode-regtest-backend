@@ -12,7 +12,7 @@ This buildout builds from source and installs everything in its own local direct
 
 DEPENDENCIES
 
-The following packages are needed for bitcoind to compile on Ubuntu 14.04LTS:
+The following packages are needed for bitcoind and postgresql to compile on Ubuntu 14.04LTS:
 
 ```build-essential libtool autotools-dev autoconf libssl-dev libboost-all-dev pkg-config postgresql-server-dev-all python-virtualenv` libdb4.8++-dev```
 
@@ -39,7 +39,7 @@ Then issue:
     ./bin/python bootstrap
     ./bin/buildout
 
-The last one will take a bit of time (typically 5-20 minutes), since it will download and build postgresql, bitcoind from source and install an assortment of python packages.
+The last one will take a bit of time (typically 5-20 minutes), since it will download and build postgresql, node.js, npm and bitcoind from source and install an assortment of python packages.
 
 INSTALL CHROMANODE
 
@@ -51,7 +51,8 @@ and must appear as "chromanode" inside the directory where this README file is. 
 enter the directory and type:
 
     git checkout regtest
-The chromanode repository https://github.com/jeorgen/chromanode-regtest-test has some pacthes for working with bitcoind in regtest mode.
+
+The chromanode repository https://github.com/jeorgen/chromanode-regtest-test has some patches for working with bitcoind in regtest mode.
 
 Install the dependencies for chromanode with:
 
