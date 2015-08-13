@@ -1,0 +1,4 @@
+[submodule "chromanode"]
+	path = chromanode
+	url = https://github.com/chromaway/chromanode/
+	branch = develop
