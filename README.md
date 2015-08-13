@@ -43,10 +43,10 @@ The last one will take a bit of time (typically 5-20 minutes), since it will dow
 
 INSTALL CHROMANODE
 
-The chromanode server is currently cloned from
-https://github.com/jeorgen/chromanode-regtest-test
+The chromanode server is currently cloned from the develop branch of
+https://github.com/chromaway/chromanode/
 
-and must appear as "chromanode" inside the directory where this README file is. Currently it does not get installed as a git submodule so this must be done manually.
+and will appear as "chromanode" inside the directory where this README file is. It gets installed as a git submodule.
 
 enter the directory and type:
 
@@ -56,7 +56,8 @@ The chromanode repository https://github.com/jeorgen/chromanode-regtest-test has
 
 Install the dependencies for chromanode with:
 
-    ./bin/npm install chromanode/
+    cd chromanode
+    ../bin/npm install .
 
 
 SETTINGS FOR POSTGRESQL WITH CHROMANODE
@@ -74,6 +75,7 @@ In another terminal window, create a database by the name of ```chromaway```:
     ./bin/createdb -O chromaway -U chromaway -W -h 127.0.0.1 -p 17520 chromaway
 
 You can now terminate the postgresql server with Ctrl-c.
+
 
 RUNNING THE SYSTEM
 
