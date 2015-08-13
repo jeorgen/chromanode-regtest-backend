@@ -46,13 +46,10 @@ INSTALL CHROMANODE
 The chromanode server is currently cloned from the develop branch of
 https://github.com/chromaway/chromanode/
 
-and will appear as "chromanode" inside the directory where this README file is. It gets installed as a git submodule.
+and will appear as "chromanode" inside the directory where this README file is. It gets installed as a git submodule. So you need to do:7
 
-enter the directory and type:
-
-    git checkout regtest
-
-The chromanode repository https://github.com/jeorgen/chromanode-regtest-test has some patches for working with bitcoind in regtest mode.
+    git submodule init
+    git submodule update
 
 Install the dependencies for chromanode with:
 
