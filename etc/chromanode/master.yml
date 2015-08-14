@@ -1,6 +1,5 @@
 chromanode:
-  network: testnet # livenet | testnet
-  testnetwork: regtest # testnet | regtest
+  network: regtest # testnet | regtest
   sync:
     maxCachedBlocks: 2 # useful for remote bitcoind
 
