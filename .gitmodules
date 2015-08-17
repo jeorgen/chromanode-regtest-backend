@@ -1,4 +1,4 @@
 [submodule "chromanode"]
 	path = chromanode
-	url = https://github.com/chromaway/chromanode/
-	branch = develop
+	url = git@github.com:jeorgen/chromanode.git
+	branch = fixclient
