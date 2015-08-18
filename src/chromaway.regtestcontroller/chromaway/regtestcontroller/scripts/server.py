@@ -10,7 +10,7 @@ jsonrpc = bottle_json_rpc.register('/')
 def add_confirmations(confirmations):
     if not confirmations in (1, 2, 3, 4, 5, 6):
         return {'error': 'confirmation value supplied not in interval from 1 through 6'}
-    bitcoind=AuthServiceProxy("http://%s:%s@127.0.0.1:8332" % (config.rpc_user, config.rpc_password))
+    bitcoind=AuthServiceProxy("http://%s:%s@127.0.0.1:8332" % (config.rpc_user, config.rpc_password), timeout=600)
     blocks=bitcoind.generate(confirmations)
     return {'result': blocks}
 
