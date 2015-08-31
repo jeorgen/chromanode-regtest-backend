@@ -2,3 +2,7 @@
 	path = chromanode
 	url = git@github.com:jeorgen/chromanode.git
 	branch = fixclient
+[submodule "src/bitcoin-abe"]
+	path = src/bitcoin-abe
+	url = git@github.com:jeorgen/bitcoin-abe.git
+	branch = regtest
