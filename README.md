@@ -75,6 +75,7 @@ In another terminal window, create a database by the name of ```chromaway```:
 You can now terminate the postgresql server with Ctrl-c.
 
 INSTALL BITCOIN-ABE
+
 The bitcoin-abe block explorer is currently cloned from the regtest branch of
 
 git@github.com:jeorgen/bitcoin-abe.git
@@ -128,7 +129,7 @@ From the config section:
 * bitcoind_port - peer port for the bitcoind server
 * rpc_user - JSON-RPC user name for accessing bitcoind
 * rpc_password- JSON-RPC password for accessing bitcoind
-* rpc_port- JSON-RPC password for accessing bitcoind
+* rpc_port- JSON-RPC port for accessing bitcoind
 * controller_port - JSON-RPC http port for mining blocks, from your test scripts. This port should be proxied externally
 * bitcoin_regtest_data_dir - where the regtest blocks are stored. A value of ```default``` means in the standard place in ~/.bitcoin/regtest
 * abe_config_location - location of config file for bitcoin-abe
@@ -182,6 +183,4 @@ With the use of a fronting Apache, Nginx or similar as a proxy, you can fold the
 
 USING THE BITCOIN-ABE REGTEST BLOCKCHAIN EXPLORER
 
-With the use of a fronting Apache, Nginx or similar as a proxy, you can fold the bitcoin-abe regtest blockchain explorer into some unused part of the url namespace of the chromanode web server. For example under:
-
-    /explorer
+Currently the bitcoin-abe regtest blockchain explorer is not "url-safe" in the sense that it can be folded into the url name space (It could also be that I have made a mistake in the proxy conf). It wants to be at the root. So use a different domain for it, or a different port.
