@@ -7,8 +7,9 @@ This buildout builds from source and installs everything in its own local direct
 * postgresql
 * bitcoind in regtest mode
 * node.js and npm
-* A small json-rpc server for mining new blocks
-* supervisord to run the above and to run chromanode
+* A small json-rpc server for mining new blocks from test scripts
+* A regtest verson of bitcoin-abe, a crypto currency block explorer, to see what's actually in the regtest blockchain
+* supervisord to run the above servers and to run the chromanode servers
 
 DEPENDENCIES
 
@@ -73,6 +74,16 @@ In another terminal window, create a database by the name of ```chromaway```:
 
 You can now terminate the postgresql server with Ctrl-c.
 
+INSTALL BITCOIN-ABE
+The bitcoin-abe block explorer is currently cloned from the regtest branch of
+
+git@github.com:jeorgen/bitcoin-abe.git
+
+It gets installed as a git submodule. So unless you haven't done it already for chromanode, you need to do:
+
+    git submodule init
+    git submodule update
+
 
 RUNNING THE SYSTEM
 
@@ -84,23 +95,44 @@ then check on the system with:
 
     ./bin/supervisorctl
 
+Note that the chromanode servers are not automatically started. Inside of supervisorctl issue:
+
+    start chromanode-master chromanode-slave
+
 Here is a sample output from ./bin/supervisorctl:
 
-    bitcoind-controller              RUNNING   pid 29703, uptime 0:00:21
-    bitcoind-server                  RUNNING   pid 29699, uptime 0:00:21
-    chromanode-master                RUNNING   pid 29767, uptime 0:00:19
-    chromanode-slave                 RUNNING   pid 29702, uptime 0:00:21
-    postgresql-server                RUNNING   pid 29700, uptime 0:00:21
+    abe                              RUNNING   pid 17179, uptime 0:00:04
+    bitcoind-controller              RUNNING   pid 17178, uptime 0:00:04
+    bitcoind-server                  RUNNING   pid 17176, uptime 0:00:04
+    chromanode-master                STOPPED   Not started
+    chromanode-slave                 STOPPED   Not started
+    postgresql-server                RUNNING   pid 17177, uptime 0:00:04
+    supervisor> start chromanode-master chromanode-slave
+
 
 The chromanode slave will serve http on port 3001, with the default settings in its YAML config file. The bitcoind-controller will serve json-rpc over http on port 17580.
 
 CHANGING PORTS AND STUFF
 
-All port and authentication settings can be changed in etc/base.cfg in the config section. For any port and auth changes to take effect:
+Port and authentication settings can be changed in etc/base.cfg in the config section. For any port and auth changes to take effect:
 
 * Stop supervisord (./bin/supervisorctl shutdown)
 * Rerun buildout (./bin/buildout)
 * restart supervisor (./bin/supervisord)
+
+Things that can be changed
+From the config section:
+
+* database_host - host for the postgresql server. Most likely 127.0.0.1 or equivalent, since it is a part of the buildout
+* database_port - port for the postgresql server.
+* bitcoind_port - peer port for the bitcoind server
+* rpc_user - JSON-RPC user name for accessing bitcoind
+* rpc_password- JSON-RPC password for accessing bitcoind
+* rpc_port- JSON-RPC password for accessing bitcoind
+* controller_port - JSON-RPC http port for mining blocks, from your test scripts. This port should be proxied externally
+* bitcoin_regtest_data_dir - where the regtest blocks are stored. A value of ```default``` means in the standard place in ~/.bitcoin/regtest
+* abe_config_location - location of config file for bitcoin-abe
+* abe_port - port tha the bitcoin-abe explorer can be accessed at. This port should be proxied externally
 
 CONSTRUCTING A BLOCKCHAIN
 
@@ -147,3 +179,9 @@ Will give a result similar to:
 With the use of a fronting Apache, Nginx or similar as a proxy, you can fold the bitcoind-controller server into some unused part of the url namespace of the chromanode web server. For example under:
 
     /regtest
+
+USING THE BITCOIN-ABE REGTEST BLOCKCHAIN EXPLORER
+
+With the use of a fronting Apache, Nginx or similar as a proxy, you can fold the bitcoin-abe regtest blockchain explorer into some unused part of the url namespace of the chromanode web server. For example under:
+
+    /explorer
