@@ -143,13 +143,13 @@ From the config section:
 
 CONSTRUCTING A BLOCKCHAIN
 
-    ./bin/bitcoin-cli -regtest  -rpcuser=chromaway -rpcpassword=masonit -regtest generate 101
+    ./bin/bitcoin-cli -regtest  -rpcuser=chromaway -rpcpassword=masonit -regtest  -rpcport=8332 -port=8333 generate 101
 
 101 is the minimum for you to get any coins to spend in regtest mode.
 
 Or if you need more coins and blocks:
 
-    ./bin/bitcoin-cli -regtest  -rpcuser=chromaway -rpcpassword=masonit -regtest generate 3000
+    ./bin/bitcoin-cli -regtest  -rpcuser=chromaway -rpcpassword=masonit -regtest  -rpcport=8332 -port=8333 generate 3000
 
 Mining 3000 blocks will take minutes to hours, depending on your hardware.
 
@@ -157,19 +157,19 @@ SPENDING BITCOINS
 
 Generate an address with:
 
-    ./bin/bitcoin-cli -rpcuser=chromaway -rpcpassword=masonit -regtest getnewaddress
+    ./bin/bitcoin-cli -rpcuser=chromaway -rpcpassword=masonit -regtest -rpcport=8332 -port=8333 getnewaddress
 
 and make a payment to it:
 
-    ./bin/bitcoin-cli -rpcuser=chromaway -rpcpassword=masonit -regtest sendtoaddress <address> 12
+    ./bin/bitcoin-cli -rpcuser=chromaway -rpcpassword=masonit -regtest -rpcport=8332 -port=8333 sendtoaddress <address> 12
 
 Then bury your transaction under some blocks:
 
-    ./bin/bitcoin-cli -rpcuser=chromaway -rpcpassword=masonit -regtest generate 6
+    ./bin/bitcoin-cli -rpcuser=chromaway -rpcpassword=masonit -regtest -rpcport=8332 -port=8333 generate 6
 
 Then use the dumpprivkey command in bitcoin-cli for that address to get the private key.
 
-    ./bin/bitcoin-cli -regtest dumpprivkey <address>
+    ./bin/bitcoin-cli -rpcuser=chromaway -rpcpassword=masonit -regtest -rpcport=8332 -port=8333 dumpprivkey <address>
 
 GENERATING BLOCKS THROUGH THE BITCOIND-CONTROLLER SERVER
 
