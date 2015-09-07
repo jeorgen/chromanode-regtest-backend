@@ -47,7 +47,7 @@ INSTALL CHROMANODE
 The chromanode server is currently cloned from the develop branch of
 https://github.com/chromaway/chromanode/
 
-and will appear as "chromanode" inside the directory where this README file is. It gets installed as a git submodule. So you need to do:7
+and will appear as "chromanode" inside the directory where this README file is. It gets installed as a git submodule. So you need to do:
 
     git submodule init
     git submodule update
@@ -112,6 +112,14 @@ Here is a sample output from ./bin/supervisorctl:
 
 
 The chromanode slave will serve http on port 3001, with the default settings in its YAML config file. The bitcoind-controller will serve json-rpc over http on port 17580.
+
+TROUBLESHOOTING
+
+If a service doesn't start or fails, you can run it from the command line to see what the problem is. Supervisord runs each service from a virtual terminal. To check what command it uses for each service, do:
+
+    less parts/supervisor/supervisord.conf 
+
+...and take the appropriate command from there and run it from a terminal to see what the problem is. var/log/ also has logs for each service.
 
 CHANGING PORTS AND STUFF
 
