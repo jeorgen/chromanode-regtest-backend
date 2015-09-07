@@ -35,6 +35,15 @@ Clone the chromanode-regtest-backend repository (this repository).  Go into the 
 
     virtualenv .
 
+
+The bitcoin-abe block explorer is currently cloned from the regtest branch of
+
+git@github.com:jeorgen/bitcoin-abe.git
+
+but it does not get installed automatcally form some reason. For now, clone git@github.com:jeorgen/bitcoin-abe.git, switch to the regtest branch and put it inside the ```src``` directory of the buildout.
+
+Go back to the root of the buildout.
+
 Then issue:
 
     ./bin/python bootstrap
@@ -73,17 +82,6 @@ In another terminal window, create a database by the name of ```chromaway```:
     ./bin/createdb -O chromaway -U chromaway -W -h 127.0.0.1 -p 17520 chromaway
 
 You can now terminate the postgresql server with Ctrl-c.
-
-INSTALL BITCOIN-ABE
-
-The bitcoin-abe block explorer is currently cloned from the regtest branch of
-
-git@github.com:jeorgen/bitcoin-abe.git
-
-It gets installed as a git submodule. So unless you haven't done it already for chromanode, you need to do:
-
-    git submodule init
-    git submodule update
 
 
 RUNNING THE SYSTEM
