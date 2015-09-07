@@ -1,8 +1,8 @@
 [submodule "chromanode"]
 	path = chromanode
-	url = git@github.com:jeorgen/chromanode.git
-	branch = fixclient
+	url = https://github.com/chromaway/chromanode.git
+	branch = develop
 [submodule "src/bitcoin-abe"]
 	path = src/bitcoin-abe
-	url = git@github.com:jeorgen/bitcoin-abe.git
+	url = https://github.com/jeorgen/bitcoin-abe.git
 	branch = regtest
