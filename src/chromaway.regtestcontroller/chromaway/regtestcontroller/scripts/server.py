@@ -20,6 +20,12 @@ def getblockcount():
     count=bitcoind.getblockcount()
     return {'result': count}
 
+@jsonrpc
+def sendtoaddress(address, amount):
+    bitcoind=AuthServiceProxy("http://%s:%s@127.0.0.1:8332" % (config.rpc_user, config.rpc_password), timeout=600)
+    result=bitcoind.sendtoaddress(address, amount)
+    return {'result': result}
+
 def main():
     run(host='localhost', port=config.controller_port, debug=True)
 
