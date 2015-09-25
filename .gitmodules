@@ -5,4 +5,4 @@
 [submodule "src/bitcoin-abe"]
 	path = src/bitcoin-abe
 	url = https://github.com/jeorgen/bitcoin-abe.git
-	branch = regtest
+	branch = nsequence
