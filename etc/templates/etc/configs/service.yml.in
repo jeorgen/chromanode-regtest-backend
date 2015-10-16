@@ -1,0 +1,14 @@
+chromanode:
+  network: regtest # livenet | testnet | regtest
+  enableHTTPS: false
+  host: localhost
+  port: 13001
+  enableNotifications: true
+
+logger:
+  level: verbose # verbose, info, warning, error
+  filename: service.log
+
+postgresql:
+  url: postgres://chromaway:masonit@localhost:17520/dual
+  poolSize: 20

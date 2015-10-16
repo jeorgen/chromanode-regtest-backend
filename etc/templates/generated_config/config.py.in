@@ -1,0 +1,13 @@
+#config.in
+from os.path import expanduser
+home = expanduser("~")
+
+rpc_user = '${rpc_user}'
+rpc_password = '${rpc_password}'
+controller_port = ${controller_port}
+bitcoin_regtest_data_dir = '${bitcoin_regtest_data_dir}'
+
+abe_port = ${abe_port}
+abe_config_location = '${abe_config_location}'
+if bitcoin_regtest_data_dir == 'default':
+    bitcoin_regtest_data_dir = '%s/.bitcoin/regtest' % home
