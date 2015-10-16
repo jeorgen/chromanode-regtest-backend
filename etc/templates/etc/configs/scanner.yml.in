@@ -3,7 +3,7 @@ chromanode:
 
 logger:
   level: verbose # verbose, info, warning, error
-  filename: scanner.log
+  filename: var/log/scanner.log
 
 postgresql:
   url: postgres://${database_user_name}:${database_password}@${database_host}:${database_port}/${database_name}
@@ -11,11 +11,11 @@ postgresql:
 
 bitcoind:
   peer:
-    host: localhost
-    port: 8333
+    host: ${bitcoind_host}
+    port: ${bitcoind_port}
   rpc:
-    host: localhost
-    port: 8332
-    user: chromaway
-    pass: masonit
+    host: ${bitcoind_host}
+    port: ${rpc_port}
+    user: ${rpc_user}
+    pass: ${rpc_password}
     protocol: http
