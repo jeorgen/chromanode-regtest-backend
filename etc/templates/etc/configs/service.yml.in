@@ -1,8 +1,8 @@
 chromanode:
-  network: regtest # livenet | testnet | regtest
+  network: ${blockchain_mode} # livenet | testnet | regtest
   enableHTTPS: false
   host: localhost
-  port: 13001
+  port: ${chromanode_service_port}
   enableNotifications: true
 
 logger:
@@ -10,5 +10,5 @@ logger:
   filename: service.log
 
 postgresql:
-  url: postgres://chromaway:masonit@localhost:17520/dual
+  url: postgres://${database_user_name}:${database_password}@${database_host}:${database_port}/${database_name}
   poolSize: 20

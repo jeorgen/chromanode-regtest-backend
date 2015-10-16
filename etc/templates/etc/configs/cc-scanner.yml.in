@@ -1,10 +1,10 @@
 chromanode:
-  network: regtest # livenet | testnet | regtest
+  network: ${blockchain_mode} # livenet | testnet | regtest
 
 logger:
   level: verbose # verbose, info, warning, error
   filename: cc-scanner.log
 
 postgresql:
-  url: postgres://chromaway:masonit@localhost:17520/dual
+  url: postgres://${database_user_name}:${database_password}@${database_host}:${database_port}/${database_name}
   poolSize: 10
