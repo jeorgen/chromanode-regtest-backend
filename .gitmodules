@@ -5,8 +5,12 @@
 [submodule "src/bitcoin-abe"]
 	path = src/bitcoin-abe
 	url = https://github.com/jeorgen/bitcoin-abe.git
-	branch = regtest
+	branch = nsequence
 [submodule "cc-scanner"]
 	path = cc-scanner
 	url = git@github.com:chromaway/cc-scanner.git
+	branch = master
+[submodule "src/cc-scanner"]
+	path = src/cc-scanner
+	url = https://github.com/chromaway/cc-scanner.git
 	branch = master
