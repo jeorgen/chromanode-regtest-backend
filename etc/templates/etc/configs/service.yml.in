@@ -1,0 +1,14 @@
+chromanode:
+  network: ${blockchain_mode} # livenet | testnet | regtest
+  enableHTTPS: false
+  host: localhost
+  port: ${chromanode_service_port}
+  enableNotifications: true
+
+logger:
+  level: verbose # verbose, info, warning, error
+  filename: service.log
+
+postgresql:
+  url: postgres://${database_user_name}:${database_password}@${database_host}:${database_port}/${database_name}
+  poolSize: 20

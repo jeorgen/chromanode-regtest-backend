@@ -40,11 +40,7 @@ The bitcoin-abe block explorer is currently cloned from the regtest branch of
 
 git@github.com:jeorgen/bitcoin-abe.git
 
-but it does not get installed automatcally form some reason. For now, clone git@github.com:jeorgen/bitcoin-abe.git, switch to the regtest branch and put it inside the ```src``` directory of the buildout.
-
-Go back to the root of the buildout.
-
-Then issue:
+Issue:
 
     ./bin/python bootstrap
     ./bin/buildout
@@ -56,15 +52,16 @@ INSTALL CHROMANODE
 The chromanode server is currently cloned from the develop branch of
 https://github.com/chromaway/chromanode/
 
-and will appear as "chromanode" inside the directory where this README file is. It gets installed as a git submodule. So you need to do:
-
-    git submodule init
-    git submodule update
+and will appear as "chromanode" in src/.
 
 Install the dependencies for chromanode with:
 
     cd chromanode
-    ../bin/npm install .
+    ../bin/npm install
+    
+cd into node_modules/coloredcoinjs-lib, issue:
+
+    npm run compile
 
 
 SETTINGS FOR POSTGRESQL WITH CHROMANODE
@@ -77,9 +74,9 @@ Start the server:
 
     ./bin/postgres -N 500 -i -p 17520 -D var/databases/postgres
 
-In another terminal window, create a database by the name of ```chromaway```:
+In another terminal window, create a database by the name of ```dual```:
 
-    ./bin/createdb -O chromaway -U chromaway -W -h 127.0.0.1 -p 17520 chromaway
+    ./bin/createdb -O chromaway -U chromaway -W -h 127.0.0.1 -p 17520 dual
 
 You can now terminate the postgresql server with Ctrl-c.
 
@@ -94,22 +91,20 @@ then check on the system with:
 
     ./bin/supervisorctl
 
-Note that the chromanode servers are not automatically started. Inside of supervisorctl issue:
-
-    start chromanode-master chromanode-slave
-
 Here is a sample output from ./bin/supervisorctl:
 
-    abe                              RUNNING   pid 17179, uptime 0:00:04
-    bitcoind-controller              RUNNING   pid 17178, uptime 0:00:04
-    bitcoind-server                  RUNNING   pid 17176, uptime 0:00:04
-    chromanode-master                STOPPED   Not started
-    chromanode-slave                 STOPPED   Not started
-    postgresql-server                RUNNING   pid 17177, uptime 0:00:04
-    supervisor> start chromanode-master chromanode-slave
+    abe                              RUNNING   pid 21947, uptime 0:00:01
+    bitcoind-controller              RUNNING   pid 21946, uptime 0:00:01
+    bitcoind-server                  RUNNING   pid 21941, uptime 0:00:01
+    cc-scanner-chromanode            RUNNING   pid 21944, uptime 0:00:01
+    cuber-explorer                   STOPPED   Not started
+    postgresql-server                RUNNING   pid 21942, uptime 0:00:01
+    scanner-chromanode               RUNNING   pid 21943, uptime 0:00:01
+    service-chromanode               RUNNING   pid 21945, uptime 0:00:01
 
 
-The chromanode slave will serve http on port 3001, with the default settings in its YAML config file. The bitcoind-controller will serve json-rpc over http on port 17580.
+
+The chromanode service will serve http on port 17581, with the default settings in its YAML config file. The bitcoind-controller will serve json-rpc over http on port 17580.
 
 TROUBLESHOOTING
 
@@ -119,9 +114,46 @@ If a service doesn't start or fails, you can run it from the command line to see
 
 ...and take the appropriate command from there and run it from a terminal to see what the problem is. var/log/ also has logs for each service.
 
-CHANGING PORTS AND STUFF
+HOW TO CHANGE THE SETTINGS IN BUILDOUT
 
-Port and authentication settings can be changed in etc/base.cfg in the config section. For any port and auth changes to take effect:
+Unless specfied otherwise, the buildout command will read its instructions from the ```./buildout.cfg``` file. In the stock install, the buildout.cfg file is just pointing to the ```./etc/base.cfg``` file.
+
+You should not change the base.cfg file directly, if possible. You can however add stuff to the buildout.cfg file that modifies the base.cfg file. Here are the rules:
+
+Modifying a section
+
+A buildout section start with a title in brackets, such as ```[config]```. If you add a section to buildout.cfg, buildout will first read the section from base.cfg, and then apply the changes found in buildout.cfg. So for example writing this in buildout.cfg:
+
+[config]
+    port_offset = 100
+
+...will change the port_offset setting from 0 to 100, but will keep all other settings from the base.cfg file. See https://pypi.python.org/pypi/zc.buildout/2.4.5#multiple-configuration-files for reference info
+
+An equal sign```=``` will replace the previous value of that setting. By typing ```+=``` you can intead add to the setting. This only makes sense for settings that are lists. Example: If base.cfg has the setting:
+
+[foo]
+bar =
+    baz
+    bletch
+    flum
+
+...then putting this in buildout.cfg
+
+[foo]
+bar +=
+    fab
+
+...will add fab to the values of ```bar```. See https://pypi.python.org/pypi/zc.buildout/2.4.5#adding-and-removing-options for reference info.
+
+CHANGING PORTS AND STUFF - RUNNING MULTIPLE BUILDOUTS ON THE SAME SERVER
+
+There is now a setting called ```port_offset``` in the config section in etc/base.cfg. It is by default set to 0. By setting it to e.g 100, all ports are shifted 100 numbers up. In this way you can run many independent buildouts in parallel.
+
+Remember to rerun buildout after having changed the settings.
+
+CHANGING INDIVIDUAL PORTS AND STUFF
+
+Port and authentication settings can be changed in the config section. For any port and auth changes to take effect:
 
 * Stop supervisord (./bin/supervisorctl shutdown)
 * Rerun buildout (./bin/buildout)
@@ -131,15 +163,44 @@ Things that can be changed
 From the config section:
 
 * database_host - host for the postgresql server. Most likely 127.0.0.1 or equivalent, since it is a part of the buildout
-* database_port - port for the postgresql server.
-* bitcoind_port - peer port for the bitcoind server
+* database_port_base - port for the postgresql server.
+* bitcoind_port_base - peer port for the bitcoind server
 * rpc_user - JSON-RPC user name for accessing bitcoind
 * rpc_password- JSON-RPC password for accessing bitcoind
-* rpc_port- JSON-RPC port for accessing bitcoind
-* controller_port - JSON-RPC http port for mining blocks, from your test scripts. This port should be proxied externally
+* rpc_port_base- JSON-RPC port for accessing bitcoind
+* chromanode_service_port_base - Port for chromanode
+* controller_port_base - JSON-RPC http port for mining blocks, from your test scripts. This port should be proxied externally
 * bitcoin_regtest_data_dir - where the regtest blocks are stored. A value of ```default``` means in the standard place in ~/.bitcoin/regtest
 * abe_config_location - location of config file for bitcoin-abe
-* abe_port - port tha the bitcoin-abe explorer can be accessed at. This port should be proxied externally
+* abe_port_base - port that the bitcoin-abe explorer can be accessed at. This port should be proxied externally
+
+DISABLING CERTAIN SERVERS
+
+Maybe you do not want to build a bitcoind or a postgresql inside of the buildout. In that case copy the parts directive in the ```[buildout]``` section of etc/base.cfg and paste it into ./buildout.cfg.
+
+Change it from this:
+
+    parts =
+        bitcoind
+        bitcoind-symlinks
+        postgresql
+        pgsql-symlinks
+        node-js
+        py-interpreter
+        supervisor
+
+To this:
+
+    parts =
+        node-js
+        py-interpreter
+        supervisor
+
+...to disable the building of postgresql and bitcoind. You can also just comment out the lines with ```#```, but the hash mark must be flush with the left margin. 
+
+Supervisor will still try to start the now non-existing servers, but that does not have any further consequences. Make sure you edit the config settings to point at your external servers. You do that best by pasting a copy of the ```[config]``` section and only include the settings you want to change.
+
+And then re-run buildout.
 
 CONSTRUCTING A BLOCKCHAIN
 

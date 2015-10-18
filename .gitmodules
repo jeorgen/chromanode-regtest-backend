@@ -1,8 +1,4 @@
-[submodule "chromanode"]
-	path = chromanode
-	url = https://github.com/chromaway/chromanode.git
-	branch = develop
-[submodule "src/bitcoin-abe"]
-	path = src/bitcoin-abe
-	url = https://github.com/jeorgen/bitcoin-abe.git
-	branch = nsequence
+[submodule "cc-scanner"]
+	path = cc-scanner
+	url = git@github.com:chromaway/cc-scanner.git
+	branch = master

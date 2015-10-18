@@ -1,0 +1,21 @@
+chromanode:
+  network: ${blockchain_mode} # livenet | testnet | regtest
+
+logger:
+  level: verbose # verbose, info, warning, error
+  filename: var/log/scanner.log
+
+postgresql:
+  url: postgres://${database_user_name}:${database_password}@${database_host}:${database_port}/${database_name}
+  poolSize: 10
+
+bitcoind:
+  peer:
+    host: ${bitcoind_host}
+    port: ${bitcoind_port}
+  rpc:
+    host: ${bitcoind_host}
+    port: ${rpc_port}
+    user: ${rpc_user}
+    pass: ${rpc_password}
+    protocol: http
