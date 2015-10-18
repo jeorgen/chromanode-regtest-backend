@@ -114,15 +114,46 @@ If a service doesn't start or fails, you can run it from the command line to see
 
 ...and take the appropriate command from there and run it from a terminal to see what the problem is. var/log/ also has logs for each service.
 
+HOW TO CHANGE THE SETTINGS IN BUILDOUT
+
+Unless specfied otherwise, the buildout command will read its instructions from the ```./buildout.cfg``` file. In the stock install, the buildout.cfg file is just pointing to the ```./etc/base.cfg``` file.
+
+You should not change the base.cfg file directly, if possible. You can however add stuff to the buildout.cfg file that modifies the base.cfg file. Here are the rules:
+
+Modifying a section
+
+A buildout section start with a title in brackets, such as ```[config]```. If you add a section to buildout.cfg, buildout will first read the section from base.cfg, and then apply the changes found in buildout.cfg. So for example writing this in buildout.cfg:
+
+[config]
+    port_offset = 100
+
+...will change the port_offset setting from 0 to 100, but will keep all other settings from the base.cfg file. See https://pypi.python.org/pypi/zc.buildout/2.4.5#multiple-configuration-files for reference info
+
+An equal sign```=``` will replace the previous value of that setting. By typing ```+=``` you can intead add to the setting. This only makes sense for settings that are lists. Example: If base.cfg has the setting:
+
+[foo]
+bar =
+    baz
+    bletch
+    flum
+
+...then putting this in buildout.cfg
+
+[foo]
+bar +=
+    fab
+
+...will add fab to the values of ```bar```. See https://pypi.python.org/pypi/zc.buildout/2.4.5#adding-and-removing-options for reference info.
+
 CHANGING PORTS AND STUFF - RUNNING MULTIPLE BUILDOUTS ON THE SAME SERVER
 
 There is now a setting called ```port_offset``` in the config section in etc/base.cfg. It is by default set to 0. By setting it to e.g 100, all ports are shifted 100 numbers up. In this way you can run many independent buildouts in parallel.
 
-Remember to rerun buildout after having changed the setting.
+Remember to rerun buildout after having changed the settings.
 
 CHANGING INDIVIDUAL PORTS AND STUFF
 
-Port and authentication settings can be changed in etc/base.cfg in the config section. For any port and auth changes to take effect:
+Port and authentication settings can be changed in the config section. For any port and auth changes to take effect:
 
 * Stop supervisord (./bin/supervisorctl shutdown)
 * Rerun buildout (./bin/buildout)
@@ -132,19 +163,20 @@ Things that can be changed
 From the config section:
 
 * database_host - host for the postgresql server. Most likely 127.0.0.1 or equivalent, since it is a part of the buildout
-* database_port - port for the postgresql server.
-* bitcoind_port - peer port for the bitcoind server
+* database_port_base - port for the postgresql server.
+* bitcoind_port_base - peer port for the bitcoind server
 * rpc_user - JSON-RPC user name for accessing bitcoind
 * rpc_password- JSON-RPC password for accessing bitcoind
-* rpc_port- JSON-RPC port for accessing bitcoind
-* controller_port - JSON-RPC http port for mining blocks, from your test scripts. This port should be proxied externally
+* rpc_port_base- JSON-RPC port for accessing bitcoind
+* chromanode_service_port_base - Port for chromanode
+* controller_port_base - JSON-RPC http port for mining blocks, from your test scripts. This port should be proxied externally
 * bitcoin_regtest_data_dir - where the regtest blocks are stored. A value of ```default``` means in the standard place in ~/.bitcoin/regtest
 * abe_config_location - location of config file for bitcoin-abe
-* abe_port - port tha the bitcoin-abe explorer can be accessed at. This port should be proxied externally
+* abe_port_base - port that the bitcoin-abe explorer can be accessed at. This port should be proxied externally
 
 DISABLING CERTAIN SERVERS
 
-Maybe you do not want to build a bitcoind or a postgresql inside of the buildout. In that case copy the parts directive in the ```[buildout]``` section of etc/base.cfg an dpaste it into ./buildout.cfg.
+Maybe you do not want to build a bitcoind or a postgresql inside of the buildout. In that case copy the parts directive in the ```[buildout]``` section of etc/base.cfg and paste it into ./buildout.cfg.
 
 Change it from this:
 
@@ -164,11 +196,11 @@ To this:
         py-interpreter
         supervisor
 
-...to disable the building of postgresql and bitcoind. You can also just comment out the lines with ```#```, but that hash mark must be flush with the left margin. 
+...to disable the building of postgresql and bitcoind. You can also just comment out the lines with ```#```, but the hash mark must be flush with the left margin. 
 
-Supervisor will still try to start the now non-existing servers, but that does not have any further consequences. Make sure you edit the config settings to point at your external servers. You do that best by pasting a copy of the ```[config]``` section into buildout.cfg and edit it.
+Supervisor will still try to start the now non-existing servers, but that does not have any further consequences. Make sure you edit the config settings to point at your external servers. You do that best by pasting a copy of the ```[config]``` section and only include the settings you want to change.
 
-And the re-run buildout.
+And then re-run buildout.
 
 CONSTRUCTING A BLOCKCHAIN
 
