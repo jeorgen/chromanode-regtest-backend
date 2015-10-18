@@ -56,40 +56,16 @@ INSTALL CHROMANODE
 The chromanode server is currently cloned from the develop branch of
 https://github.com/chromaway/chromanode/
 
-and will appear as "chromanode" inside the directory where this README file is. It gets installed as a git submodule. So you need to do:
-
-    git submodule init
-    git submodule update
+and will appear as "chromanode" in src/.
 
 Install the dependencies for chromanode with:
 
     cd chromanode
-    ../bin/npm install .
-
-INSTALL CC-SCANNER
-
-The cc-scanner server is currently cloned from the master branch of
-https://github.com/chromaway/cc-scanner/
-
-and will appear as "cc-scanner" inside the directory where this README file is. It gets installed as a git submodule. So you need to do:
-
-    git submodule init
-    git submodule update
-
-...if you haven't done so before.
-
-Install the dependencies for cc-scanner with:
-
-    cd cc-scanner
-    ../bin/npm install .
+    ../bin/npm install
     
 cd into node_modules/coloredcoinjs-lib, issue:
 
     npm install && npm run compile
-
-cd into the node_modules directory of coloredcoinjs-lib, and remove the bitcore lib:
-
-    rm -rf bitcore/
 
 
 SETTINGS FOR POSTGRESQL WITH CHROMANODE
