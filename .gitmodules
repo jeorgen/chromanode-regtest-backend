@@ -1,4 +1,1 @@
-[submodule "cc-scanner"]
-	path = cc-scanner
-	url = git@github.com:chromaway/cc-scanner.git
-	branch = master
+
