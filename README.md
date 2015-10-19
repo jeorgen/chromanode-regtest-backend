@@ -106,6 +106,25 @@ Here is a sample output from ./bin/supervisorctl:
 
 The chromanode service will serve http on port 17581, with the default settings in its YAML config file. The bitcoind-controller will serve json-rpc over http on port 17580.
 
+## Proxy example
+
+This example for Apache:
+
+    <VirtualHost *:80>
+      ServerName chromanode-regtest.example.com
+        ProxyPreserveHost On
+        Timeout 600
+        # proxy the bitcoind controller, map it to 
+        # '/regtest' in the url name space
+        ProxyPass /regtest/ http://localhost:17580/
+        ProxyPassReverse /regtest/ http://localhost:17580/
+        
+        # proxy the chromanode server
+        ProxyPass / http://localhost:17581/
+        ProxyPassReverse / http://localhost:17581/
+    </VirtualHost>
+
+
 # Troubleshooting
 
 If a service doesn't start or fails, you can run it from the command line to see what the problem is. Supervisord runs each service from a virtual terminal. To check what command it uses for each service, do:
@@ -114,7 +133,16 @@ If a service doesn't start or fails, you can run it from the command line to see
 
 ...and take the appropriate command from there and run it from a terminal to see what the problem is. var/log/ also has logs for each service.
 
-# How To Change The Settings In Buildout
+# Configuration of ports, auth settings and all other settings
+
+You can change the setting in the buildout to:
+
+* Have different ports for the servers
+* Change user names and passwords
+* Refer to external bitcoind and postgresql servers
+* Run several buildouts on the same machine by moving all ports an offset amount
+
+## How To Change Settings In Buildout
 
 Unless specfied otherwise, the buildout command will read its instructions from the ```./buildout.cfg``` file. In the stock install, the buildout.cfg file is just pointing to the ```./etc/base.cfg``` file.
 
@@ -145,9 +173,11 @@ An equal sign```=``` will replace the previous value of that setting. By typing 
 
 ...will add fab to the values of ```bar```. See https://pypi.python.org/pypi/zc.buildout/2.4.5# adding-and-removing-options for reference info.
 
-## Changing Ports And Stuff - Running Multiple Buildouts On The Same Server
+## Running Multiple Buildouts On The Same Server
 
 There is now a setting called ```port_offset``` in the config section in etc/base.cfg. It is by default set to 0. By setting it to e.g 100, all ports are shifted 100 numbers up. In this way you can run many independent buildouts in parallel.
+
+All ports (except bitcoin-abe for the moment) are between 17500 and 17599 by default. Default value of port_offset is 0 but e.g. 100 would shift all server ports and accompanying config files and command line parameters 100 numbers up to in between 17600 and 17699 . 
 
 Remember to rerun buildout after having changed the settings.
 
@@ -202,7 +232,7 @@ Supervisor will still try to start the now non-existing servers, but that does n
 
 And then re-run buildout.
 
-# Constructing A Blockchain
+# Constructing A Regtest Blockchain
 
     ./bin/bitcoin-cli -regtest  -rpcuser=chromaway -rpcpassword=masonit -regtest  -rpcport=8332 -port=8333 generate 101
 
