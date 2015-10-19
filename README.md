@@ -1,4 +1,4 @@
-WHAT IT DOES
+#  What It Does
 
 This buildout is for testing use with chromanode, specifically to run it in regtest mode with bitcoind and in doing so having unlimited access to (regtest) bitcoins. The purpose is to facilitate testing bitcoin dependent services, including transactions and confirmations, without having to rely on bitcoin or testnet faucets. The buildout contains a json-rpc server through which you can tell bitcoind to add confirmations on top of submitted transactions.
 
@@ -11,7 +11,7 @@ This buildout builds from source and installs everything in its own local direct
 * A regtest verson of bitcoin-abe, a crypto currency block explorer, to see what's actually in the regtest blockchain
 * supervisord to run the above servers and to run the chromanode servers
 
-DEPENDENCIES
+# Dependencies
 
 The following packages are needed for bitcoind and postgresql to compile on Ubuntu 14.04LTS:
 
@@ -20,7 +20,7 @@ The following packages are needed for bitcoind and postgresql to compile on Ubun
 The libdb4.8++-dev is not part of the standard Ubuntu repositories. You can add the following repository under ```/etc/apt/sources.list.d/``` to get it:
 
     deb http://ppa.launchpad.net/bitcoin/bitcoin/ubuntu trusty main
-    # deb-src http://ppa.launchpad.net/bitcoin/bitcoin/ubuntu trusty main
+    #  deb-src http://ppa.launchpad.net/bitcoin/bitcoin/ubuntu trusty main
 
 Run:
 
@@ -47,7 +47,7 @@ Issue:
 
 The last one will take a bit of time (typically 5-20 minutes), since it will download and build postgresql, node.js, npm and bitcoind from source and install an assortment of python packages.
 
-INSTALL CHROMANODE
+# Install Chromanode
 
 The chromanode server is currently cloned from the develop branch of
 https://github.com/chromaway/chromanode/
@@ -64,7 +64,7 @@ cd into node_modules/coloredcoinjs-lib, issue:
     npm run compile
 
 
-SETTINGS FOR POSTGRESQL WITH CHROMANODE
+# Settings For Postgresql With Chromanode
 
 Initialize the postgresql database cluster with the password ```masonit```:
 
@@ -81,7 +81,7 @@ In another terminal window, create a database by the name of ```dual```:
 You can now terminate the postgresql server with Ctrl-c.
 
 
-RUNNING THE SYSTEM
+# Running The System
 
 Issue:
 
@@ -106,7 +106,7 @@ Here is a sample output from ./bin/supervisorctl:
 
 The chromanode service will serve http on port 17581, with the default settings in its YAML config file. The bitcoind-controller will serve json-rpc over http on port 17580.
 
-TROUBLESHOOTING
+# Troubleshooting
 
 If a service doesn't start or fails, you can run it from the command line to see what the problem is. Supervisord runs each service from a virtual terminal. To check what command it uses for each service, do:
 
@@ -114,20 +114,20 @@ If a service doesn't start or fails, you can run it from the command line to see
 
 ...and take the appropriate command from there and run it from a terminal to see what the problem is. var/log/ also has logs for each service.
 
-HOW TO CHANGE THE SETTINGS IN BUILDOUT
+# How To Change The Settings In Buildout
 
 Unless specfied otherwise, the buildout command will read its instructions from the ```./buildout.cfg``` file. In the stock install, the buildout.cfg file is just pointing to the ```./etc/base.cfg``` file.
 
 You should not change the base.cfg file directly, if possible. You can however add stuff to the buildout.cfg file that modifies the base.cfg file. Here are the rules:
 
-Modifying a section
+# # Modifying a section
 
 A buildout section start with a title in brackets, such as ```[config]```. If you add a section to buildout.cfg, buildout will first read the section from base.cfg, and then apply the changes found in buildout.cfg. So for example writing this in buildout.cfg:
 
     [config]
         port_offset = 100
 
-...will change the port_offset setting from 0 to 100, but will keep all other settings from the base.cfg file. See https://pypi.python.org/pypi/zc.buildout/2.4.5#multiple-configuration-files for reference info
+...will change the port_offset setting from 0 to 100, but will keep all other settings from the base.cfg file. See https://pypi.python.org/pypi/zc.buildout/2.4.5# multiple-configuration-files for reference info
 
 An equal sign```=``` will replace the previous value of that setting. By typing ```+=``` you can intead add to the setting. This only makes sense for settings that are lists. Example: If base.cfg has the setting:
 
@@ -143,15 +143,15 @@ An equal sign```=``` will replace the previous value of that setting. By typing 
     bar +=
         fab
 
-...will add fab to the values of ```bar```. See https://pypi.python.org/pypi/zc.buildout/2.4.5#adding-and-removing-options for reference info.
+...will add fab to the values of ```bar```. See https://pypi.python.org/pypi/zc.buildout/2.4.5# adding-and-removing-options for reference info.
 
-CHANGING PORTS AND STUFF - RUNNING MULTIPLE BUILDOUTS ON THE SAME SERVER
+# Changing Ports And Stuff - Running Multiple Buildouts On The Same Server
 
 There is now a setting called ```port_offset``` in the config section in etc/base.cfg. It is by default set to 0. By setting it to e.g 100, all ports are shifted 100 numbers up. In this way you can run many independent buildouts in parallel.
 
 Remember to rerun buildout after having changed the settings.
 
-CHANGING INDIVIDUAL PORTS AND STUFF
+# Changing Individual Ports And Stuff
 
 Port and authentication settings can be changed in the config section. For any port and auth changes to take effect:
 
@@ -174,7 +174,7 @@ From the config section:
 * abe_config_location - location of config file for bitcoin-abe
 * abe_port_base - port that the bitcoin-abe explorer can be accessed at. This port should be proxied externally
 
-DISABLING CERTAIN SERVERS
+# Disabling Certain Servers
 
 Maybe you do not want to build a bitcoind or a postgresql inside of the buildout. In that case copy the parts directive in the ```[buildout]``` section of etc/base.cfg and paste it into ./buildout.cfg.
 
@@ -196,13 +196,13 @@ To this:
         py-interpreter
         supervisor
 
-...to disable the building of postgresql and bitcoind. You can also just comment out the lines with ```#```, but the hash mark must be flush with the left margin. 
+...to disable the building of postgresql and bitcoind. You can also just comment out the lines with ```# ```, but the hash mark must be flush with the left margin. 
 
 Supervisor will still try to start the now non-existing servers, but that does not have any further consequences. Make sure you edit the config settings to point at your external servers. You do that best by pasting a copy of the ```[config]``` section and only include the settings you want to change.
 
 And then re-run buildout.
 
-CONSTRUCTING A BLOCKCHAIN
+# Constructing A Blockchain
 
     ./bin/bitcoin-cli -regtest  -rpcuser=chromaway -rpcpassword=masonit -regtest  -rpcport=8332 -port=8333 generate 101
 
@@ -214,7 +214,7 @@ Or if you need more coins and blocks:
 
 Mining 3000 blocks will take minutes to hours, depending on your hardware.
 
-SPENDING BITCOINS
+# Spending Bitcoins
 
 Generate an address with:
 
@@ -232,7 +232,7 @@ Then use the dumpprivkey command in bitcoin-cli for that address to get the priv
 
     ./bin/bitcoin-cli -rpcuser=chromaway -rpcpassword=masonit -regtest -rpcport=8332 -port=8333 dumpprivkey <address>
 
-GENERATING BLOCKS THROUGH THE BITCOIND-CONTROLLER SERVER
+# Generating Blocks Through The Bitcoind-controller Server
 
 How do you mine blocks when you are not at the command line? The bitcoind-controller json-rpc server accepts instructions to mine from one up to six blocks, so that you can bury your transactions and make them appear confirmed. Beware that it takes a bit of time to mine a block, tens of seconds (depending on your hardware). Here an example using pyjsonrpc for instructing bitcoind to mine one block:
 
@@ -248,6 +248,6 @@ With the use of a fronting Apache, Nginx or similar as a proxy, you can fold the
 
     /regtest
 
-USING THE BITCOIN-ABE REGTEST BLOCKCHAIN EXPLORER
+# Using The Bitcoin-abe Regtest Blockchain Explorer
 
 Currently the bitcoin-abe regtest blockchain explorer is not "url-safe" in the sense that it can be folded into the url name space (It could also be that I have made a mistake in the proxy conf). It wants to be at the root. So use a different domain for it, or a different port.
