@@ -124,24 +124,24 @@ Modifying a section
 
 A buildout section start with a title in brackets, such as ```[config]```. If you add a section to buildout.cfg, buildout will first read the section from base.cfg, and then apply the changes found in buildout.cfg. So for example writing this in buildout.cfg:
 
-[config]
-    port_offset = 100
+    [config]
+        port_offset = 100
 
 ...will change the port_offset setting from 0 to 100, but will keep all other settings from the base.cfg file. See https://pypi.python.org/pypi/zc.buildout/2.4.5#multiple-configuration-files for reference info
 
 An equal sign```=``` will replace the previous value of that setting. By typing ```+=``` you can intead add to the setting. This only makes sense for settings that are lists. Example: If base.cfg has the setting:
 
-[foo]
-bar =
-    baz
-    bletch
-    flum
+    [foo]
+    bar =
+        baz
+        bletch
+        flum
 
 ...then putting this in buildout.cfg
 
-[foo]
-bar +=
-    fab
+    [foo]
+    bar +=
+        fab
 
 ...will add fab to the values of ```bar```. See https://pypi.python.org/pypi/zc.buildout/2.4.5#adding-and-removing-options for reference info.
 
