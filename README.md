@@ -11,29 +11,6 @@ This buildout builds from source and installs everything in its own local direct
 * A regtest verson of bitcoin-abe, a crypto currency block explorer, to see what's actually in the regtest blockchain
 * supervisord to run the above servers and to run the chromanode servers
 
-<!-- MarkdownTOC -->
-
-- Dependencies
-- Installation
-    - Install Chromanode
-    - Settings For Postgresql With Chromanode
-- Running The System
-    - Proxy example
-- Troubleshooting
-- Configuration of ports, auth settings and all other settings
-    - How To Change Settings In Buildout
-    - Modifying a section
-    - Running Multiple Buildouts On The Same Server
-    - Changing Individual Ports And Authentication Settings
-    - Disabling Certain Servers
-- Constructing A Regtest Blockchain
-- Spending Bitcoins
-- Generating Blocks Through The Bitcoind-controller Server
-- Using The Bitcoin-abe Regtest Blockchain Explorer
-
-<!-- /MarkdownTOC -->
-
-
 # Dependencies
 
 The following packages are needed for bitcoind and postgresql to compile on Ubuntu 14.04LTS:
