@@ -29,7 +29,7 @@ Run:
 On Debian 7, the libdb4.8++-dev and friends (libdb4.8, libdb4.8-dev) must be downloaded from a newer Debian and be manually
 installed with dpkg -i, or there may be a third party repository as well.
 
-INSTALLATION
+# Installation
 
 Clone the chromanode-regtest-backend repository (this repository).  Go into the cloned repository. Type:
 
@@ -47,7 +47,7 @@ Issue:
 
 The last one will take a bit of time (typically 5-20 minutes), since it will download and build postgresql, node.js, npm and bitcoind from source and install an assortment of python packages.
 
-# Install Chromanode
+## Install Chromanode
 
 The chromanode server is currently cloned from the develop branch of
 https://github.com/chromaway/chromanode/
@@ -64,7 +64,7 @@ cd into node_modules/coloredcoinjs-lib, issue:
     npm run compile
 
 
-# Settings For Postgresql With Chromanode
+## Settings For Postgresql With Chromanode
 
 Initialize the postgresql database cluster with the password ```masonit```:
 
@@ -120,7 +120,7 @@ Unless specfied otherwise, the buildout command will read its instructions from 
 
 You should not change the base.cfg file directly, if possible. You can however add stuff to the buildout.cfg file that modifies the base.cfg file. Here are the rules:
 
-# # Modifying a section
+## Modifying a section
 
 A buildout section start with a title in brackets, such as ```[config]```. If you add a section to buildout.cfg, buildout will first read the section from base.cfg, and then apply the changes found in buildout.cfg. So for example writing this in buildout.cfg:
 
@@ -145,13 +145,13 @@ An equal sign```=``` will replace the previous value of that setting. By typing 
 
 ...will add fab to the values of ```bar```. See https://pypi.python.org/pypi/zc.buildout/2.4.5# adding-and-removing-options for reference info.
 
-# Changing Ports And Stuff - Running Multiple Buildouts On The Same Server
+## Changing Ports And Stuff - Running Multiple Buildouts On The Same Server
 
 There is now a setting called ```port_offset``` in the config section in etc/base.cfg. It is by default set to 0. By setting it to e.g 100, all ports are shifted 100 numbers up. In this way you can run many independent buildouts in parallel.
 
 Remember to rerun buildout after having changed the settings.
 
-# Changing Individual Ports And Stuff
+## Changing Individual Ports And Authentication Settings
 
 Port and authentication settings can be changed in the config section. For any port and auth changes to take effect:
 
@@ -174,7 +174,7 @@ From the config section:
 * abe_config_location - location of config file for bitcoin-abe
 * abe_port_base - port that the bitcoin-abe explorer can be accessed at. This port should be proxied externally
 
-# Disabling Certain Servers
+## Disabling Certain Servers
 
 Maybe you do not want to build a bitcoind or a postgresql inside of the buildout. In that case copy the parts directive in the ```[buildout]``` section of etc/base.cfg and paste it into ./buildout.cfg.
 
