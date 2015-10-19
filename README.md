@@ -11,6 +11,29 @@ This buildout builds from source and installs everything in its own local direct
 * A regtest verson of bitcoin-abe, a crypto currency block explorer, to see what's actually in the regtest blockchain
 * supervisord to run the above servers and to run the chromanode servers
 
+<!-- MarkdownTOC -->
+
+- Dependencies
+- Installation
+    - Install Chromanode
+    - Settings For Postgresql With Chromanode
+- Running The System
+    - Proxy example
+- Troubleshooting
+- Configuration of ports, auth settings and all other settings
+    - How To Change Settings In Buildout
+    - Modifying a section
+    - Running Multiple Buildouts On The Same Server
+    - Changing Individual Ports And Authentication Settings
+    - Disabling Certain Servers
+- Constructing A Regtest Blockchain
+- Spending Bitcoins
+- Generating Blocks Through The Bitcoind-controller Server
+- Using The Bitcoin-abe Regtest Blockchain Explorer
+
+<!-- /MarkdownTOC -->
+
+
 # Dependencies
 
 The following packages are needed for bitcoind and postgresql to compile on Ubuntu 14.04LTS:
@@ -155,9 +178,9 @@ A buildout section start with a title in brackets, such as ```[config]```. If yo
     [config]
         port_offset = 100
 
-...will change the port_offset setting from 0 to 100, but will keep all other settings from the base.cfg file. See https://pypi.python.org/pypi/zc.buildout/2.4.5# multiple-configuration-files for reference info
+...will change the port_offset setting from 0 to 100, but will keep all other settings from the base.cfg file. See https://pypi.python.org/pypi/zc.buildout/2.4.5#multiple-configuration-files for reference info
 
-An equal sign```=``` will replace the previous value of that setting. By typing ```+=``` you can intead add to the setting. This only makes sense for settings that are lists. Example: If base.cfg has the setting:
+An equal sign```=``` will replace the previous value of that setting. By typing ```+=``` you can instead add to the setting. This only makes sense for settings that are lists. Example: If base.cfg has the setting:
 
     [foo]
     bar =
@@ -171,7 +194,7 @@ An equal sign```=``` will replace the previous value of that setting. By typing 
     bar +=
         fab
 
-...will add fab to the values of ```bar```. See https://pypi.python.org/pypi/zc.buildout/2.4.5# adding-and-removing-options for reference info.
+...will add fab to the values of ```bar```. See https://pypi.python.org/pypi/zc.buildout/2.4.5#adding-and-removing-options for reference info.
 
 ## Running Multiple Buildouts On The Same Server
 
@@ -210,6 +233,7 @@ Maybe you do not want to build a bitcoind or a postgresql inside of the buildout
 
 Change it from this:
 
+    [buildout]
     parts =
         bitcoind
         bitcoind-symlinks
@@ -221,6 +245,7 @@ Change it from this:
 
 To this:
 
+    [buildout]
     parts =
         node-js
         py-interpreter
@@ -228,7 +253,7 @@ To this:
 
 ...to disable the building of postgresql and bitcoind. You can also just comment out the lines with ```# ```, but the hash mark must be flush with the left margin. 
 
-Supervisor will still try to start the now non-existing servers, but that does not have any further consequences. Make sure you edit the config settings to point at your external servers. You do that best by pasting a copy of the ```[config]``` section and only include the settings you want to change.
+Supervisor will still try to start the now non-existing servers, but that does not have any propagating consequences. Make sure you edit the config settings to point at your external servers. You do that best by pasting a copy of the ```[config]``` section and only include the settings you want to change.
 
 And then re-run buildout.
 
