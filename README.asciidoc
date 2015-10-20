@@ -149,7 +149,6 @@ abe                              RUNNING   pid 21947, uptime 0:00:01
 bitcoind-controller              RUNNING   pid 21946, uptime 0:00:01
 bitcoind-server                  RUNNING   pid 21941, uptime 0:00:01
 cc-scanner-chromanode            RUNNING   pid 21944, uptime 0:00:01
-cuber-explorer                   STOPPED   Not started
 postgresql-server                RUNNING   pid 21942, uptime 0:00:01
 scanner-chromanode               RUNNING   pid 21943, uptime 0:00:01
 service-chromanode               RUNNING   pid 21945, uptime 0:00:01
@@ -362,7 +361,6 @@ And then re-run buildout.
 
 == Constructing A Regtest Blockchain
 
-[source,bash]
 ----
 ./bin/bitcoin-cli -regtest  -rpcuser=chromaway -rpcpassword=masonit -regtest  -rpcport=8332 -port=8333 generate 101
 ----
