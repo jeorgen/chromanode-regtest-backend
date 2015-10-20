@@ -163,6 +163,7 @@ json-rpc over http on port 17580.
 === Proxy example
 
 .This example for Apache
+[source,apache]
 ----
 <VirtualHost *:80>
   ServerName chromanode-regtest.example.com
