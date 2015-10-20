@@ -1,10 +1,7 @@
+= What It Does
 :toc:
-:toc-placement: preamble
+:toc-placement!:
 :toc-title: pass:[<b>Table of Contents</b>]
-
-[[what-it-does]]
-What It Does
-------------
 
 This buildout is for testing use with chromanode, specifically to run it
 in regtest mode with bitcoind and in doing so having unlimited access to
@@ -24,6 +21,8 @@ local directory:
 * A regtest verson of bitcoin-abe, a crypto currency block explorer, to
 see what's actually in the regtest blockchain
 * supervisord to run the above servers and to run the chromanode servers
+
+toc::[]
 
 [[dependencies]]
 Dependencies
