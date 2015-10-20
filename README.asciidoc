@@ -13,7 +13,7 @@ toc::[]
 
 [[what-it-contains]]
 What it contains
-------------
+-----------------
 
 The buildout contains a
 json-rpc server through which you can tell bitcoind to add confirmations
