@@ -40,10 +40,10 @@ The libdb4.8++-dev is not part of the standard Ubuntu repositories. You
 can add the following repository under `/etc/apt/sources.list.d/` to get
 it:
 
-----------------------------------------------------------------------
+----
 deb http://ppa.launchpad.net/bitcoin/bitcoin/ubuntu trusty main
 #  deb-src http://ppa.launchpad.net/bitcoin/bitcoin/ubuntu trusty main
-----------------------------------------------------------------------
+----
 
 Run:
 
@@ -60,9 +60,9 @@ dpkg -i, or there may be a third party repository as well.
 Clone the chromanode-regtest-backend repository (this repository). Go
 into the cloned repository. Type:
 
-------------
+----
 virtualenv .
-------------
+----
 
 The bitcoin-abe block explorer is currently cloned from the regtest
 branch of
@@ -71,10 +71,10 @@ git@github.com:jeorgen/bitcoin-abe.git
 
 Issue:
 
-----------------------
+----
 ./bin/python bootstrap
 ./bin/buildout
-----------------------
+----
 
 The last one will take a bit of time (typically 5-20 minutes), since it
 will download and build postgresql, node.js, npm and bitcoind from
@@ -91,16 +91,16 @@ and will appear as "chromanode" in src/.
 
 Install the dependencies for chromanode with:
 
-------------------
+----
 cd chromanode
 ../bin/npm install
-------------------
+----
 
 cd into node_modules/coloredcoinjs-lib, issue:
 
----------------
+----
 npm run compile
----------------
+----
 
 
 === Settings For Postgresql With Chromanode
@@ -108,21 +108,21 @@ npm run compile
 
 Initialize the postgresql database cluster with the password `masonit`:
 
-----------------------------------------------------
+----
 ./bin/initdb -U chromaway -W var/databases/postgres/
-----------------------------------------------------
+----
 
 Start the server:
 
------------------------------------------------------------
+----
 ./bin/postgres -N 500 -i -p 17520 -D var/databases/postgres
------------------------------------------------------------
+----
 
 In another terminal window, create a database by the name of `dual`:
 
-----------------------------------------------------------------------
+----
 ./bin/createdb -O chromaway -U chromaway -W -h 127.0.0.1 -p 17520 dual
-----------------------------------------------------------------------
+----
 
 You can now terminate the postgresql server with Ctrl-c.
 
@@ -132,19 +132,19 @@ You can now terminate the postgresql server with Ctrl-c.
 
 Issue:
 
------------------
+----
 ./bin/supervisord
------------------
+----
 
 then check on the system with:
 
--------------------
+----
 ./bin/supervisorctl
--------------------
+----
 
 Here is a sample output from ./bin/supervisorctl:
 
---------------------------------------------------------------------
+----
 abe                              RUNNING   pid 21947, uptime 0:00:01
 bitcoind-controller              RUNNING   pid 21946, uptime 0:00:01
 bitcoind-server                  RUNNING   pid 21941, uptime 0:00:01
@@ -153,7 +153,7 @@ cuber-explorer                   STOPPED   Not started
 postgresql-server                RUNNING   pid 21942, uptime 0:00:01
 scanner-chromanode               RUNNING   pid 21943, uptime 0:00:01
 service-chromanode               RUNNING   pid 21945, uptime 0:00:01
---------------------------------------------------------------------
+----
 
 The chromanode service will serve http on port 17581, with the default
 settings in its YAML config file. The bitcoind-controller will serve
@@ -164,7 +164,7 @@ json-rpc over http on port 17580.
 
 This example for Apache:
 
-------------------------------------------------------
+----
 <VirtualHost *:80>
   ServerName chromanode-regtest.example.com
     ProxyPreserveHost On
@@ -178,7 +178,7 @@ This example for Apache:
     ProxyPass / http://localhost:17581/
     ProxyPassReverse / http://localhost:17581/
 </VirtualHost>
-------------------------------------------------------
+----
 
 
 == Troubleshooting
@@ -188,9 +188,9 @@ If a service doesn't start or fails, you can run it from the command
 line to see what the problem is. Supervisord runs each service from a
 virtual terminal. To check what command it uses for each service, do:
 
----------------------------------------
+----
 less parts/supervisor/supervisord.conf 
----------------------------------------
+----
 
 ...and take the appropriate command from there and run it from a
 terminal to see what the problem is. var/log/ also has logs for each
@@ -229,10 +229,10 @@ If you add a section to buildout.cfg, buildout will first read the
 section from base.cfg, and then apply the changes found in buildout.cfg.
 So for example writing this in buildout.cfg:
 
----------------------
+----
 [config]
     port_offset = 100
----------------------
+----
 
 ...will change the port_offset setting from 0 to 100, but will keep all
 other settings from the base.cfg file. See
@@ -243,21 +243,21 @@ An equal sign`=` will replace the previous value of that setting. By
 typing `+=` you can instead add to the setting. This only makes sense
 for settings that are lists. Example: If base.cfg has the setting:
 
-----------
+----
 [foo]
 bar =
     baz
     bletch
     flum
-----------
+----
 
 ...then putting this in buildout.cfg
 
--------
+----
 [foo]
 bar +=
     fab
--------
+----
 
 ...will add fab to the values of `bar`. See
 https://pypi.python.org/pypi/zc.buildout/2.4.5#adding-and-removing-options
@@ -318,7 +318,7 @@ section of etc/base.cfg and paste it into ./buildout.cfg.
 
 Change it from this:
 
----------------------
+----
 [buildout]
 parts =
     bitcoind
@@ -328,17 +328,17 @@ parts =
     node-js
     py-interpreter
     supervisor
----------------------
+----
 
 To this:
 
-------------------
+----
 [buildout]
 parts =
     node-js
     py-interpreter
     supervisor
-------------------
+----
 
 ...to disable the building of postgresql and bitcoind. You can also just
 comment out the lines with `#`, but the hash mark must be flush with the
@@ -355,17 +355,17 @@ And then re-run buildout.
 
 == Constructing A Regtest Blockchain
 
--------------------------------------------------------------------------------------------------------------------
+----
 ./bin/bitcoin-cli -regtest  -rpcuser=chromaway -rpcpassword=masonit -regtest  -rpcport=8332 -port=8333 generate 101
--------------------------------------------------------------------------------------------------------------------
+----
 
 101 is the minimum for you to get any coins to spend in regtest mode.
 
 Or if you need more coins and blocks:
 
---------------------------------------------------------------------------------------------------------------------
+----
 ./bin/bitcoin-cli -regtest  -rpcuser=chromaway -rpcpassword=masonit -regtest  -rpcport=8332 -port=8333 generate 3000
---------------------------------------------------------------------------------------------------------------------
+----
 
 Mining 3000 blocks will take minutes to hours, depending on your
 hardware.
@@ -376,28 +376,28 @@ hardware.
 
 Generate an address with:
 
----------------------------------------------------------------------------------------------------------
+----
 ./bin/bitcoin-cli -rpcuser=chromaway -rpcpassword=masonit -regtest -rpcport=8332 -port=8333 getnewaddress
----------------------------------------------------------------------------------------------------------
+----
 
 and make a payment to it:
 
-----------------------------------------------------------------------------------------------------------------------
+----
 ./bin/bitcoin-cli -rpcuser=chromaway -rpcpassword=masonit -regtest -rpcport=8332 -port=8333 sendtoaddress <address> 12
-----------------------------------------------------------------------------------------------------------------------
+----
 
 Then bury your transaction under some blocks:
 
-------------------------------------------------------------------------------------------------------
+----
 ./bin/bitcoin-cli -rpcuser=chromaway -rpcpassword=masonit -regtest -rpcport=8332 -port=8333 generate 6
-------------------------------------------------------------------------------------------------------
+----
 
 Then use the dumpprivkey command in bitcoin-cli for that address to get
 the private key.
 
------------------------------------------------------------------------------------------------------------------
+----
 ./bin/bitcoin-cli -rpcuser=chromaway -rpcpassword=masonit -regtest -rpcport=8332 -port=8333 dumpprivkey <address>
------------------------------------------------------------------------------------------------------------------
+----
 
 
 == Generating Blocks Through The Bitcoind-controller Server
@@ -410,25 +410,25 @@ them appear confirmed. Beware that it takes a bit of time to mine a
 block, tens of seconds (depending on your hardware). Here an example
 using pyjsonrpc for instructing bitcoind to mine one block:
 
--------------------------------------------------------------
+----
 import pyjsonrpc
 client = pyjsonrpc.HttpClient(url = "http://localhost:17580")
 client.add_confirmations(1)
--------------------------------------------------------------
+----
 
 Will give a result similar to:
 
-----------------------------------------------------------------------------------
+----
 {u'result': [u'00000001c2cf5c571d09117b832ec1b6a36c72c768504ffc28fce0b443ef6a3a']}
-----------------------------------------------------------------------------------
+----
 
 With the use of a fronting Apache, Nginx or similar as a proxy, you can
 fold the bitcoind-controller server into some unused part of the url
 namespace of the chromanode web server. For example under:
 
---------
+----
 /regtest
---------
+----
 
 
 == Using The Bitcoin-abe Regtest Blockchain Explorer
