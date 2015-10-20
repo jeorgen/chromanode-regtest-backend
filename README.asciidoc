@@ -7,7 +7,15 @@ This buildout is for testing use with chromanode, specifically to run it
 in regtest mode with bitcoind and in doing so having unlimited access to
 (regtest) bitcoins. The purpose is to facilitate testing bitcoin
 dependent services, including transactions and confirmations, without
-having to rely on bitcoin or testnet faucets. The buildout contains a
+having to rely on bitcoin or testnet faucets. 
+
+toc::[]
+
+[[what-it-contains]]
+What it contains
+------------
+
+The buildout contains a
 json-rpc server through which you can tell bitcoind to add confirmations
 on top of submitted transactions.
 
@@ -21,8 +29,6 @@ local directory:
 * A regtest verson of bitcoin-abe, a crypto currency block explorer, to
 see what's actually in the regtest blockchain
 * supervisord to run the above servers and to run the chromanode servers
-
-toc::[]
 
 [[dependencies]]
 Dependencies
