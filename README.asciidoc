@@ -29,8 +29,7 @@ see what's actually in the regtest blockchain
 * supervisord to run the above servers and to run the chromanode servers
 
 
-Dependencies
-------------
+== Dependencies
 
 The following packages are needed for bitcoind and postgresql to compile
 on Ubuntu 14.04LTS:
@@ -55,8 +54,8 @@ must be downloaded from a newer Debian and be manually installed with
 dpkg -i, or there may be a third party repository as well.
 
 
-Installation
-------------
+== Installation
+
 
 Clone the chromanode-regtest-backend repository (this repository). Go
 into the cloned repository. Type:
@@ -82,8 +81,8 @@ will download and build postgresql, node.js, npm and bitcoind from
 source and install an assortment of python packages.
 
 
-Install Chromanode
-~~~~~~~~~~~~~~~~~~
+=== Install Chromanode
+
 
 The chromanode server is currently cloned from the develop branch of
 https://github.com/chromaway/chromanode/
@@ -104,8 +103,8 @@ npm run compile
 ---------------
 
 
-Settings For Postgresql With Chromanode
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Settings For Postgresql With Chromanode
+
 
 Initialize the postgresql database cluster with the password `masonit`:
 
@@ -128,8 +127,8 @@ In another terminal window, create a database by the name of `dual`:
 You can now terminate the postgresql server with Ctrl-c.
 
 
-Running The System
-------------------
+== Running The System
+
 
 Issue:
 
@@ -161,8 +160,7 @@ settings in its YAML config file. The bitcoind-controller will serve
 json-rpc over http on port 17580.
 
 
-Proxy example
-~~~~~~~~~~~~~
+=== Proxy example
 
 This example for Apache:
 
@@ -183,8 +181,8 @@ This example for Apache:
 ------------------------------------------------------
 
 
-Troubleshooting
----------------
+== Troubleshooting
+
 
 If a service doesn't start or fails, you can run it from the command
 line to see what the problem is. Supervisord runs each service from a
@@ -199,8 +197,8 @@ terminal to see what the problem is. var/log/ also has logs for each
 service.
 
 
-Configuration of ports, auth settings and all other settings
-------------------------------------------------------------
+== Configuration of ports, auth settings and all other settings
+
 
 You can change the setting in the buildout to:
 
@@ -211,8 +209,8 @@ You can change the setting in the buildout to:
 offset amount
 
 
-How To Change Settings In Buildout
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== How To Change Settings In Buildout
+
 
 Unless specfied otherwise, the buildout command will read its
 instructions from the `./buildout.cfg` file. In the stock install, the
@@ -223,8 +221,8 @@ however add stuff to the buildout.cfg file that modifies the base.cfg
 file. Here are the rules:
 
 
-Modifying a section
-~~~~~~~~~~~~~~~~~~~
+=== Modifying a section
+
 
 A buildout section start with a title in brackets, such as `[config]`.
 If you add a section to buildout.cfg, buildout will first read the
@@ -266,8 +264,8 @@ https://pypi.python.org/pypi/zc.buildout/2.4.5#adding-and-removing-options
 for reference info.
 
 
-Running Multiple Buildouts On The Same Server
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Running Multiple Buildouts On The Same Server
+
 
 There is now a setting called `port_offset` in the config section in
 etc/base.cfg. It is by default set to 0. By setting it to e.g 100, all
@@ -282,8 +280,8 @@ parameters 100 numbers up to in between 17600 and 17699 .
 Remember to rerun buildout after having changed the settings.
 
 
-Changing Individual Ports And Authentication Settings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Changing Individual Ports And Authentication Settings
+
 
 Port and authentication settings can be changed in the config section.
 For any port and auth changes to take effect:
@@ -311,8 +309,8 @@ value of `default` means in the standard place in ~/.bitcoin/regtest
 This port should be proxied externally
 
 
-Disabling Certain Servers
-~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Disabling Certain Servers
+
 
 Maybe you do not want to build a bitcoind or a postgresql inside of the
 buildout. In that case copy the parts directive in the `[buildout]`
@@ -355,8 +353,7 @@ you want to change.
 And then re-run buildout.
 
 
-Constructing A Regtest Blockchain
----------------------------------
+== Constructing A Regtest Blockchain
 
 -------------------------------------------------------------------------------------------------------------------
 ./bin/bitcoin-cli -regtest  -rpcuser=chromaway -rpcpassword=masonit -regtest  -rpcport=8332 -port=8333 generate 101
@@ -374,8 +371,8 @@ Mining 3000 blocks will take minutes to hours, depending on your
 hardware.
 
 
-Spending Bitcoins
------------------
+== Spending Bitcoins
+
 
 Generate an address with:
 
@@ -403,8 +400,8 @@ the private key.
 -----------------------------------------------------------------------------------------------------------------
 
 
-Generating Blocks Through The Bitcoind-controller Server
---------------------------------------------------------
+== Generating Blocks Through The Bitcoind-controller Server
+
 
 How do you mine blocks when you are not at the command line? The
 bitcoind-controller json-rpc server accepts instructions to mine from
@@ -434,8 +431,7 @@ namespace of the chromanode web server. For example under:
 --------
 
 
-Using The Bitcoin-abe Regtest Blockchain Explorer
--------------------------------------------------
+== Using The Bitcoin-abe Regtest Blockchain Explorer
 
 Currently the bitcoin-abe regtest blockchain explorer is not "url-safe"
 in the sense that it can be folded into the url name space (It could
