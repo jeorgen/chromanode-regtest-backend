@@ -11,8 +11,7 @@ having to rely on bitcoin or testnet faucets.
 
 toc::[]
 
-[[what-it-contains]]
-What it contains
+== What it contains
 -----------------
 
 The buildout contains a
