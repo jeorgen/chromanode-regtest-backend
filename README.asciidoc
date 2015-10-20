@@ -362,6 +362,7 @@ And then re-run buildout.
 
 == Constructing A Regtest Blockchain
 
+[source,bash]
 ----
 ./bin/bitcoin-cli -regtest  -rpcuser=chromaway -rpcpassword=masonit -regtest  -rpcport=8332 -port=8333 generate 101
 ----
