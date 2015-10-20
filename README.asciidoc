@@ -24,6 +24,7 @@ local directory:
 * bitcoind in regtest mode
 * node.js and npm
 * A small json-rpc server for mining new blocks from test scripts
+* Chromanode, including the cc-scanner component
 * A regtest verson of bitcoin-abe, a crypto currency block explorer, to
 see what's actually in the regtest blockchain
 * supervisord to run the above servers and to run the chromanode servers
@@ -47,7 +48,7 @@ deb http://ppa.launchpad.net/bitcoin/bitcoin/ubuntu trusty main
 
 Run:
 
-`apt-get install build-essential libtool autotools-dev autoconf libssl-dev libboost-all-dev pkg-config postgresql-server-dev-all python-virtualenv\` libdb4.8++-dev`
+`apt-get install build-essential libtool autotools-dev autoconf libssl-dev libboost-all-dev pkg-config postgresql-server-dev-all python-virtualenv\ libdb4.8++-dev`
 
 On Debian 7, the libdb4.8++-dev and friends (libdb4.8, libdb4.8-dev)
 must be downloaded from a newer Debian and be manually installed with
