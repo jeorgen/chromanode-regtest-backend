@@ -269,8 +269,10 @@ for reference info.
 
 There is now a setting called `port_offset` in the config section in
 etc/base.cfg. It is by default set to 0. By setting it to e.g 100, all
-ports are shifted 100 numbers up. In this way you can run many
-independent buildouts in parallel.
+ports are shifted 100 numbers up. 
+
+TIP: In this way you can run many
+independent buildouts in parallel
 
 All ports (except bitcoin-abe for the moment) are between 17500 and
 17599 by default. Default value of port_offset is 0 but e.g. 100 would
