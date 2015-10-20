@@ -28,7 +28,7 @@ local directory:
 see what's actually in the regtest blockchain
 * supervisord to run the above servers and to run the chromanode servers
 
-[[dependencies]]
+
 Dependencies
 ------------
 
@@ -54,7 +54,7 @@ On Debian 7, the libdb4.8++-dev and friends (libdb4.8, libdb4.8-dev)
 must be downloaded from a newer Debian and be manually installed with
 dpkg -i, or there may be a third party repository as well.
 
-[[installation]]
+
 Installation
 ------------
 
@@ -81,7 +81,7 @@ The last one will take a bit of time (typically 5-20 minutes), since it
 will download and build postgresql, node.js, npm and bitcoind from
 source and install an assortment of python packages.
 
-[[install-chromanode]]
+
 Install Chromanode
 ~~~~~~~~~~~~~~~~~~
 
@@ -103,7 +103,7 @@ cd into node_modules/coloredcoinjs-lib, issue:
 npm run compile
 ---------------
 
-[[settings-for-postgresql-with-chromanode]]
+
 Settings For Postgresql With Chromanode
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -127,7 +127,7 @@ In another terminal window, create a database by the name of `dual`:
 
 You can now terminate the postgresql server with Ctrl-c.
 
-[[running-the-system]]
+
 Running The System
 ------------------
 
@@ -160,7 +160,7 @@ The chromanode service will serve http on port 17581, with the default
 settings in its YAML config file. The bitcoind-controller will serve
 json-rpc over http on port 17580.
 
-[[proxy-example]]
+
 Proxy example
 ~~~~~~~~~~~~~
 
@@ -182,7 +182,7 @@ This example for Apache:
 </VirtualHost>
 ------------------------------------------------------
 
-[[troubleshooting]]
+
 Troubleshooting
 ---------------
 
@@ -198,7 +198,7 @@ less parts/supervisor/supervisord.conf
 terminal to see what the problem is. var/log/ also has logs for each
 service.
 
-[[configuration-of-ports-auth-settings-and-all-other-settings]]
+
 Configuration of ports, auth settings and all other settings
 ------------------------------------------------------------
 
@@ -210,7 +210,7 @@ You can change the setting in the buildout to:
 * Run several buildouts on the same machine by moving all ports an
 offset amount
 
-[[how-to-change-settings-in-buildout]]
+
 How To Change Settings In Buildout
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -222,7 +222,7 @@ You should not change the base.cfg file directly, if possible. You can
 however add stuff to the buildout.cfg file that modifies the base.cfg
 file. Here are the rules:
 
-[[modifying-a-section]]
+
 Modifying a section
 ~~~~~~~~~~~~~~~~~~~
 
@@ -265,7 +265,7 @@ bar +=
 https://pypi.python.org/pypi/zc.buildout/2.4.5#adding-and-removing-options
 for reference info.
 
-[[running-multiple-buildouts-on-the-same-server]]
+
 Running Multiple Buildouts On The Same Server
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -281,7 +281,7 @@ parameters 100 numbers up to in between 17600 and 17699 .
 
 Remember to rerun buildout after having changed the settings.
 
-[[changing-individual-ports-and-authentication-settings]]
+
 Changing Individual Ports And Authentication Settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -310,7 +310,7 @@ value of `default` means in the standard place in ~/.bitcoin/regtest
 * abe_port_base - port that the bitcoin-abe explorer can be accessed at.
 This port should be proxied externally
 
-[[disabling-certain-servers]]
+
 Disabling Certain Servers
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -354,7 +354,7 @@ you want to change.
 
 And then re-run buildout.
 
-[[constructing-a-regtest-blockchain]]
+
 Constructing A Regtest Blockchain
 ---------------------------------
 
@@ -373,7 +373,7 @@ Or if you need more coins and blocks:
 Mining 3000 blocks will take minutes to hours, depending on your
 hardware.
 
-[[spending-bitcoins]]
+
 Spending Bitcoins
 -----------------
 
@@ -402,7 +402,7 @@ the private key.
 ./bin/bitcoin-cli -rpcuser=chromaway -rpcpassword=masonit -regtest -rpcport=8332 -port=8333 dumpprivkey <address>
 -----------------------------------------------------------------------------------------------------------------
 
-[[generating-blocks-through-the-bitcoind-controller-server]]
+
 Generating Blocks Through The Bitcoind-controller Server
 --------------------------------------------------------
 
@@ -433,7 +433,7 @@ namespace of the chromanode web server. For example under:
 /regtest
 --------
 
-[[using-the-bitcoin-abe-regtest-blockchain-explorer]]
+
 Using The Bitcoin-abe Regtest Blockchain Explorer
 -------------------------------------------------
 
