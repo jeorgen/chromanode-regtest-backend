@@ -229,6 +229,7 @@ If you add a section to buildout.cfg, buildout will first read the
 section from base.cfg, and then apply the changes found in buildout.cfg.
 So for example writing this in buildout.cfg:
 
+[source,ini]
 ----
 [config]
     port_offset = 100
