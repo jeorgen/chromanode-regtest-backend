@@ -244,6 +244,7 @@ An equal sign`=` will replace the previous value of that setting. By
 typing `+=` you can instead add to the setting. This only makes sense
 for settings that are lists. Example: If base.cfg has the setting:
 
+[source,ini]
 ----
 [foo]
 bar =
@@ -254,6 +255,7 @@ bar =
 
 ...then putting this in buildout.cfg
 
+[source,ini]
 ----
 [foo]
 bar +=
@@ -321,6 +323,7 @@ section of etc/base.cfg and paste it into ./buildout.cfg.
 
 Change it from this:
 
+[source,ini]
 ----
 [buildout]
 parts =
@@ -335,6 +338,7 @@ parts =
 
 To this:
 
+[source,ini]
 ----
 [buildout]
 parts =
