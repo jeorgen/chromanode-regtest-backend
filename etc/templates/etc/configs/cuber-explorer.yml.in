@@ -5,3 +5,4 @@ port: ${cuber_explorer_port}
 # coincolor: epobc:4ed18f46bc7becddc57d91cb4bb825f0cbb8e3bef7ef0bd1be1c9fb786c67ea6:0:0
 coincolor: ${cuber_explorer_coin_color}
 addressformat: ${address_format} # testnet|mainnet
+batchsize: ${cuber_explorer_batch_size}
